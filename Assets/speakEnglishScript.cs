@@ -139,4 +139,21 @@ public class speakEnglishScript : MonoBehaviour {
         needyModule.HandlePass();
         Debug.LogFormat("[Speak English #{0}] ===", moduleId);
     }
+    
+    #pragma warning disable 414
+    private readonly string TwitchHelpMessage = @"Use !{0} 1/2/3 to press that corresponding button from top to bottom.";
+    #pragma warning restore 414
+    
+    IEnumerator HandleTwitchCommand(string Command) {
+        Command = Command.Trim().ToUpper();
+	    yield return null;
+	    if (Command == "1")
+		    buttons[0].OnInteract();
+	    else if (Command == "2")
+		    buttons[1].OnInteract();
+	    else if (Command == "3")
+		    buttons[2].OnInteract();
+	    else
+		    yield return "sendtochaterror Invalid command!";
+    }
 }
